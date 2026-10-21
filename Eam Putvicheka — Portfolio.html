@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eam Putvicheka — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page: #f2ece7;
+    --card: #fbf8f5;
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --peach: #e2896c;
+    --peach-soft: #fbe4da;
+    --line: #e9e2db;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #1c1a18;
+      --card: #242120;
+      --ink: #f2ece7;
+      --muted: #b2aca5;
+      --peach: #e8a082;
+      --peach-soft: #3a2d27;
+      --line: #35302c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #1c1a18;
+    --card: #242120;
+    --ink: #f2ece7;
+    --muted: #b2aca5;
+    --peach: #e8a082;
+    --peach-soft: #3a2d27;
+    --line: #35302c;
+  }
+  * { box-sizing: border-box; }
+  html {
+    scroll-padding-top: calc(88px + env(safe-area-inset-top, 0px));
+  }
+  body {
+    margin: 0;
+    background: radial-gradient(120% 60% at 85% 0%, var(--peach-soft), transparent 60%), var(--card);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .card {
+    max-width: 1180px;
+    margin: 0 auto;
+    background: transparent;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.2rem;
+    padding: 2rem 2rem 1rem;
+    flex-wrap: wrap;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    backdrop-filter: blur(14px);
+  }
+  .logo {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+    margin-right: 1rem;
+  }
+  nav a {
+    position: relative;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding-bottom: 0.35rem;
+    transition: color 220ms ease;
+  }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--peach);
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 280ms ease;
+  }
+  nav a:hover,
+  nav a:focus-visible,
+  nav a.active {
+    color: var(--ink);
+  }
+  nav a:hover::after,
+  nav a:focus-visible::after,
+  nav a.active::after {
+    transform: scaleX(1);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 3rem 0;
+  }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 1rem 1.5rem 0; }
+    nav { gap: 1.1rem; padding: 1.4rem 1.2rem 0.8rem; }
+    nav a { font-size: 0.82rem; }
+  }
+
+  .hero-text { padding: 2rem 0 3rem; }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--peach-soft);
+    color: var(--peach);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.6rem;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.6vw, 3.1rem);
+    line-height: 1.12;
+    margin: 0 0 1.3rem;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--peach);
+    font-weight: 500;
+  }
+
+  .hero-text p.lead {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    max-width: 42ch;
+    margin: 0 0 2rem;
+  }
+
+  .cta-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.85rem 1.4rem;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--ink); color: var(--card); border: 1px solid var(--ink); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+
+  .portrait {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    background:
+      radial-gradient(90% 70% at 70% 20%, var(--peach-soft), transparent 65%),
+      linear-gradient(160deg, #efe7e0, #e3d8cf);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .monogram {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 7rem;
+    color: var(--ink);
+    opacity: 0.88;
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 760px) {
+    .portrait { height: 260px; margin-bottom: 1.5rem; }
+    .monogram { font-size: 4.5rem; }
+  }
+
+  section.block {
+    padding: 2.5rem 3rem 3rem;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 760px) { section.block { padding: 2rem 1.5rem 2.4rem; } }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 1.4rem;
+  }
+  .section-kicker {
+    display: inline-flex;
+    color: var(--peach);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.7rem;
+    text-transform: uppercase;
+  }
+  .about-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.14;
+    max-width: 11ch;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .about-panel {
+    border-left: 3px solid var(--peach);
+    padding: 1.35rem 0 1.35rem 1.6rem;
+    background: linear-gradient(90deg, var(--peach-soft), transparent 62%);
+  }
+  .about-copy { max-width: 78ch; margin-bottom: 1rem; }
+  .about-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1.2rem;
+  }
+  .about-highlights span {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.45rem 0.75rem;
+    background: color-mix(in srgb, var(--card) 78%, var(--peach-soft));
+  }
+  @media (max-width: 760px) {
+    .about-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .about-section h2 { max-width: 100%; }
+    .about-panel { padding: 1.1rem 0 1.1rem 1.1rem; }
+  }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill {
+    font-size: 0.86rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    background: var(--peach-soft);
+    color: var(--peach);
+    border-radius: 999px;
+  }
+
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.7rem;
+  }
+  .project h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .project .tag { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+  .project p.desc { color: var(--muted); max-width: 60ch; margin: 0 0 1.3rem; line-height: 1.6; }
+  .stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .stack span {
+    font-size: 0.8rem; font-weight: 600; color: var(--ink);
+    border: 1px solid var(--line); padding: 0.3rem 0.7rem; border-radius: 6px;
+  }
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.5rem; padding: 0; margin: 0; list-style: none; }
+  .features li { font-size: 0.93rem; padding-left: 1.1rem; position: relative; }
+  .features li::before {
+    content: ""; position: absolute; left: 0; top: 0.55em;
+    width: 6px; height: 6px; background: var(--peach); border-radius: 50%;
+  }
+  @media (max-width: 540px) { .features { grid-template-columns: 1fr; } }
+
+  footer.contact {
+    padding: 2rem 3rem 3rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  footer.contact a { color: var(--peach); text-decoration: none; font-weight: 600; margin-left: 1rem; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <nav>
+    <div class="logo">EP</div>
+    <a href="#top" class="active">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#project">Featured</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero" id="top">
+    <div class="hero-text">
+      <div class="pill">✦ Studying Web Development</div>
+      <h1>I Build Systems<br>That Solve Real<br><em>Everyday Problems</em></h1>
+      <p class="lead">Hi, I'm Eam Putvicheka — a Web Development student at ITE, Royal University of Phnom Penh, building full-stack apps with React and Laravel.</p>
+      <div class="cta-row">
+        <a href="#project" class="btn btn-primary">View My Work ↗</a>
+        <a href="https://www.linkedin.com/in/eam-putvicheka-0196843a4" class="btn btn-outline" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a href="https://github.com/Atomic-Kai" class="btn btn-outline" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <span class="monogram">EP</span>
+    </div>
+  </div>
+
+  <section class="block about-section" id="about">
+    <div class="about-grid">
+      <div>
+        <span class="section-kicker">About me</span>
+        <h2>Growing as a practical web developer</h2>
+      </div>
+      <div class="about-panel">
+        <p class="desc about-copy">I'm a fourth-year Information Technology Engineering student at the Royal University of Phnom Penh (RUPP) with a strong interest in web development. I have experience working with technologies such as HTML, CSS, JavaScript, React, PHP, Laravel, and MySQL, and I'm continuously improving my skills through university projects and personal practice.</p>
+        <p class="desc about-copy">I enjoy building practical web applications, solving problems, and learning new technologies. I'm currently looking for opportunities to apply my skills, gain real-world experience, and grow as a developer.</p>
+        <div class="about-highlights" aria-label="About highlights">
+          <span>Fourth-year ITE student</span>
+          <span>Web development focus</span>
+          <span>Open to real-world experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <span class="skill">React</span>
+      <span class="skill">Laravel</span>
+      <span class="skill">PHP</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">MySQL</span>
+      <span class="skill">Tailwind CSS</span>
+      <span class="skill">REST APIs</span>
+      <span class="skill">Git &amp; GitHub</span>
+    </div>
+  </section>
+
+  <section class="block" id="project">
+    <h2>Featured Project</h2>
+    <div class="project">
+      <div class="project-head">
+        <h3>Online Appointment &amp; Queue Management System</h3>
+        <span class="tag">Web Development — course project</span>
+      </div>
+      <p class="desc">A website that lets customers book appointments online and track their position in a live queue, replacing manual walk-in and phone-based booking for service businesses like clinics, salons, and offices.</p>
+      <div class="stack">
+        <span>React</span>
+        <span>Laravel</span>
+        <span>MySQL</span>
+        <span>Laravel Sanctum</span>
+      </div>
+      <ul class="features">
+        <li>Online appointment booking by time slot</li>
+        <li>Real-time queue position &amp; wait time</li>
+        <li>Admin dashboard for staff</li>
+        <li>Automated booking &amp; queue notifications</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="contact" id="contact">
+    <span>Royal University of Phnom Penh · ITE</span>
+    <span>
+      <a href="mailto:you@email.com">Email</a>
+      <a href="https://github.com/Atomic-Kai">GitHub</a>
+      <a href="https://www.linkedin.com/in/eam-putvicheka-0196843a4">LinkedIn</a>
+    </span>
+  </footer>
+
+</div>
+
+<script>
+  const internalLinks = document.querySelectorAll('a[href^="#"]');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const easeInOutSine = (progress) => -(Math.cos(Math.PI * progress) - 1) / 2;
+
+  internalLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const href = link.getAttribute('href');
+      const target = document.querySelector(href);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      if (link.closest('nav')) {
+        document.querySelectorAll('nav a').forEach((navLink) => {
+          navLink.classList.toggle('active', navLink === link);
+        });
+      }
+
+      const startY = window.scrollY;
+      const navHeight = document.querySelector('nav')?.offsetHeight ?? 0;
+      const targetY = Math.max(target.getBoundingClientRect().top + startY - navHeight - 12, 0);
+      const distance = targetY - startY;
+      const duration = prefersReducedMotion ? 0 : Math.min(Math.max(Math.abs(distance) * 0.55, 620), 920);
+      const startTime = performance.now();
+
+      if (duration === 0) {
+        window.scrollTo(0, targetY);
+        window.history.pushState(null, '', href);
+        return;
+      }
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        window.scrollTo(0, startY + distance * easeInOutSine(progress));
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          window.history.pushState(null, '', href);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    });
+  });
+</script>
+</body>
+</html>
