@@ -69,7 +69,7 @@ function App() {
 	return (
 		<main className="card">
 			<nav className="site-nav" aria-label="Main navigation">
-				<div className="logo">EP</div>
+				<div className="logo">E</div>
 				<a href="#top" className="active">Home</a>
 				<a href="#about">About</a>
 				<a href="#education">Education</a>
