@@ -9,6 +9,8 @@ import Skills from './components/skills'
 
 function App() {
 	useEffect(() => {
+		document.title = 'Eam Putvicheka | Full stack developer'
+
 		const links = document.querySelectorAll('a[href^="#"]')
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
